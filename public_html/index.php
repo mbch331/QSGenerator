@@ -23,6 +23,7 @@ if (!isset($_POST)||empty($_POST)) //No information was submitted, so need to sh
 }
 else
 {
+	require_once('functions.inc'); // Store the functions in a separate file
 	//Form was submitted so needs to be processed
 	var_dump($_POST);
 	//Step 1 processing: creating rows
@@ -32,6 +33,14 @@ else
 	{
 		//Step 2 processing: create cells from rows
 		$cell[$i]=explode("\t",$row[$i]);
+		if($i==0) // Row 0 contains the properties
+		{
+			for($j=0;$j<count($cell[0]);$j++)
+			{
+				$property[$j]['id']=getPropertyId($cell[0][$j]); //Get the property ID from Wikidata
+			}
+			var_dump($property);
+		}
 	}
 	
 }
