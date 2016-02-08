@@ -28,5 +28,11 @@ else
 	//Step 1 processing: creating rows
 	$row=explode("\r\n";$_POST['data']);
 	var_dump($row);
+	for($i=0;$i<count($row);$i++)
+	{
+		//Step 2 processing: create cells from rows
+		$cell[$i]=explode("\t",$row[$i]);
+	}
+	
 }
 ?>
