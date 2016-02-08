@@ -25,5 +25,8 @@ else
 {
 	//Form was submitted so needs to be processed
 	var_dump($_POST);
+	//Step 1 processing: creating rows
+	$row=explode("\r\n";$_POST['data']);
+	var_dump($row);
 }
 ?>
