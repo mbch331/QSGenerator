@@ -13,3 +13,4 @@ service.manifest
 update.sh
 .viminfo
 replica.my.cnf
+public_html/cookiefile.tmp
