@@ -64,6 +64,6 @@ function getPropertyId($propname)
 	var_dump($jsonresult);
 	$jsonvalue=json_decode($jsonresult);
 	var_dump($jsonvalue);
-	//return $jsonvalue
+	return $jsonvalue->search[0]->id;
 }
 ?>
