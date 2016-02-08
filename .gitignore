@@ -12,3 +12,4 @@ service.manifest
 .ssh
 update.sh
 .viminfo
+replica.my.cnf
