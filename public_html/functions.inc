@@ -64,5 +64,8 @@ function getPropertyId($propname)
 	$apiQuery='action=wbsearchentities&format=json&search='.$propname.'&language=nl&type=property';
 	$jsonresult=invokeURL($wdapiurl.$apiQuery);
 	var_dump($jsonresult);
+	$jsonvalue=json_decode($jsonresult);
+	var_dump($jsonvalue);
+	//return $jsonvalue
 }
 ?>
