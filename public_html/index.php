@@ -33,6 +33,7 @@ else
 		//Step 2 processing: create cells from rows
 		$cell[$i]=explode("\t",$row[$i]);
 	}
+	var_dump($cell);
 	
 }
 ?>
