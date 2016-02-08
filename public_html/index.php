@@ -1,4 +1,5 @@
 <?php
+require_once('header.inc');
 if (!isset($_POST)||empty($_POST)) //No information was submitted, so need to show form
 {
 	?>
