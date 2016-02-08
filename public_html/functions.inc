@@ -6,6 +6,7 @@ $wdapiurl='https://www.wikidata.org/w/api.php?';
 
 function wdlogin(&$wduser,&$wdpass)
 {
+	global $wdapiurl;
 	$URL2=$wdapiurl."action=login&format=xml";
 	$postdata=array("lgname" => $wduser,"lgpassword" => $wdpass );
 	$post=http_build_query($postdata);
@@ -59,6 +60,7 @@ function invokeURL ($url, $trans=FALSE,$post=0,$close=TRUE,$postdata="")
 }
 function getPropertyId($propname)
 {
+	global $wdapiurl;
 	$apiQuery='action=wbsearchentities&format=json&search='.$propname.'&language=nl&type=property';
 	$jsonresult=invokeURL($wdapiurl.$apiQuery);
 	var_dump($jsonresult);
