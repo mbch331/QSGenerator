@@ -60,12 +60,27 @@ function invokeURL ($url, $trans=FALSE,$post=0,$close=TRUE,$postdata="")
 }
 function getPropertyId($propname)
 {
-	global $wdapiurl;
-	$apiQuery='action=wbsearchentities&format=json&search='.$propname.'&language=nl&type=property';
-	$jsonresult=invokeURL($wdapiurl.$apiQuery,$trans=TRUE);
-	var_dump($jsonresult);
-	$jsonvalue=json_decode($jsonresult);
-	var_dump($jsonvalue);
-	return $jsonvalue->search[0]->id;
+	if($propname=="Label")
+	{
+		return "L??"; //L = label, ?? = language unknown
+	}
+	elseif ($propname=="Description")
+	{
+		return "D??"; //D = description, ?? = language unknown
+	}
+	elseif ($propname=="Alias")
+	{
+		return "A??"; //A = alias, ?? = language unknown
+	}
+	else
+	{
+		global $wdapiurl;
+		$apiQuery='action=wbsearchentities&format=json&search='.$propname.'&language=nl&type=property';
+		$jsonresult=invokeURL($wdapiurl.$apiQuery,$trans=TRUE);
+		var_dump($jsonresult);
+		$jsonvalue=json_decode($jsonresult);
+		var_dump($jsonvalue);
+		return $jsonvalue->search[0]->id;
+	}
 }
 ?>
