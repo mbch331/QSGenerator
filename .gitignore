@@ -14,3 +14,4 @@ update.sh
 .viminfo
 replica.my.cnf
 public_html/cookiefile.tmp
+public_html/robots.txt
