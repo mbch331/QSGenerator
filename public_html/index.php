@@ -48,14 +48,14 @@ else
 			}
 		}
 	}
-	echo "CREATE<br>\r\n";
-	for ($i=1;$i<count($pair);$i++)
+	for ($i=1;$i<=count($pair);$i++)
 	{
+		echo "CREATE<br>\r\n";
 		foreach($pair[$i] as $key => $value)
 		{
 			if($value!="")
 			{
-				echo "LAST\t$key\t$value<br>\r\n";
+				echo "LAST\t$key\t".formatValue($value,getDataType($key))."<br>\r\n";
 			}
 		}
 	}	

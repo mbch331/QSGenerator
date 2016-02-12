@@ -58,7 +58,7 @@ function invokeURL ($url, $trans=FALSE,$post=0,$close=TRUE,$postdata="")
 		curl_close($ch);
 	}
 }
-function getPropertyId($propname)
+function getPropertyId($propname,$type='property')
 {
 	if($propname=="Label")
 	{
@@ -75,10 +75,57 @@ function getPropertyId($propname)
 	else
 	{
 		global $wdapiurl;
-		$apiQuery='action=wbsearchentities&format=json&search='.$propname.'&language=nl&type=property';
+		$apiQuery='action=wbsearchentities&format=json&search='.$propname.'&language=nl&type='.$type;
 		$jsonresult=invokeURL($wdapiurl.$apiQuery,$trans=TRUE);
 		$jsonvalue=json_decode($jsonresult);
 		return $jsonvalue->search[0]->id;
 	}
 }
+
+function getDataType($propid)
+{
+	global $wdapiurl;
+	if ($propid=="L??"||$propid=="D??"||$propid=="A??")
+	{
+		return "string";
+	}
+	else
+	{
+		$apiQuery='action=wbgetentities&format=json&ids='.$propid.'&props=datatype';
+        	$jsonresult=invokeURL($wdapiurl.$apiQuery,$trans=TRUE);
+		$jsonvalue=json_decode($jsonresult);
+ 		return $jsonvalue->entities->$propid->datatype;
+	}
+}
+
+function formatValue(&$value, $datatype)
+{
+	switch ($datatype)
+	{
+		case 'string':
+		return '"'.$value.'"'; //A string needs to be formatted as "some value"
+		break;
+		case 'monolingualtext':
+		return '??:"'.$value.'"'; //A monolingualtext needs to be formatted as languagecode:"somevalue"
+		break;
+		case 'wikibase-item':
+		return getPropertyID($value,'item'); //We need the QID
+		break;
+		case 'time': //Need to write the code for this type
+		try {$datum=new DateTime($value);} catch (Exception $e) {}
+		if(isset($datum))
+		{	
+			$dat="+0000000".$datum->format("Y-m-d")."T00:00:00Z/11"; // Format: +00000001840-01-01T00:00:00Z/09
+			return $dat;
+		}
+		else
+		{
+			return "";
+		}
+		break;
+		default:
+		return $value; //No formatting needed or formatting unknown
+	}
+}
+
 ?>
