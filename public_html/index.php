@@ -25,10 +25,8 @@ else
 {
 	require_once('functions.inc'); // Store the functions in a separate file
 	//Form was submitted so needs to be processed
-	var_dump($_POST);
 	//Step 1 processing: creating rows
 	$row=explode("\r\n",trim($_POST['data']));
-	var_dump($row);
 	for($i=0;$i<count($row);$i++)
 	{
 		//Step 2 processing: create cells from rows
@@ -39,11 +37,9 @@ else
 			{
 				$property[$j]['id']=getPropertyId($cell[0][$j]); //Get the property ID from Wikidata
 			}
-			var_dump($property);
 		}
 		else
 		{
-			var_dump($cell[$i]);
 			for($j=0;$j<count($cell[$i]);$j++)
 			{
 				$key=$property[$j]['id'];
@@ -52,7 +48,16 @@ else
 			}
 		}
 	}
-	var_dump($cell); var_dump($pair);
-	
+	echo "CREATE<br>\r\n";
+	for ($i=0;$i<count($pair);$i++)
+	{
+		foreach($pair[$i] as $key => $value)
+		{
+			if($value!="")
+			{
+				echo "LAST\t$key\t$value<br>\r\n";
+			}
+		}
+	}	
 }
 ?>
