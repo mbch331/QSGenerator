@@ -11,7 +11,7 @@ if (!isset($_POST)||empty($_POST)) //No information was submitted, so need to sh
 	<meta name="description" content="Tool to generate statements to use in QuickStatements based on tab based text">
 	</head>
 	<body>
-	<p id="information">Currently only English and Dutch property names/item names (if they need to be translated into QID's) are accepted. Dates need to be in format: d-m-Y (no trailing zeros needed, but no problem if they are added. First row needs to be the properties, other rows need to be the statements.</p>
+	<p id="information">Currently only English and Dutch property names and Dutch item names (if they need to be translated into QID's) are accepted. Dates need to be in format: d-m-Y (no trailing zeros needed, but no problem if they are added. First row needs to be the properties, other rows need to be the statements.</p>
 	<form action="index.php" method="POST" enctype="multipart/form-data">
 	<textarea name="data" rows="6" cols="100"></textarea>
 	<input type="hidden" name="verzonden" value="1">
