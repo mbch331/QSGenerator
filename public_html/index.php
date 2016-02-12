@@ -43,9 +43,12 @@ else
 		}
 		else
 		{
+			var_dump($cell[$i]);
 			for($j=0;$j<count($cell[$i]);$j++)
 			{
-				$pair[$i]=array($property[$j] => $cell[$i][$j]);
+				$key=$property[$j]['id'];
+				$value=$cell[$i][$j];
+				$pair[$i][$key]=$value;
 			}
 		}
 	}
