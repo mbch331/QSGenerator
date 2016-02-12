@@ -49,7 +49,7 @@ else
 		}
 	}
 	echo "CREATE<br>\r\n";
-	for ($i=0;$i<count($pair);$i++)
+	for ($i=1;$i<count($pair);$i++)
 	{
 		foreach($pair[$i] as $key => $value)
 		{
