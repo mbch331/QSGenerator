@@ -41,8 +41,15 @@ else
 			}
 			var_dump($property);
 		}
+		else
+		{
+			for($j=0;$j<count($cell[$i]);$j++)
+			{
+				$pair[$i]=array($property[$j] => $cell[$i][$j]);
+			}
+		}
 	}
-	var_dump($cell);
+	var_dump($cell); var_dump($pair);
 	
 }
 ?>
