@@ -78,6 +78,11 @@ function getPropertyId($propname,$type='property')
 		$apiQuery='action=wbsearchentities&format=json&search='.$propname.'&language=nl&type='.$type;
 		$jsonresult=invokeURL($wdapiurl.$apiQuery,$trans=TRUE);
 		$jsonvalue=json_decode($jsonresult);
+		if (!isset($jsonvalue->search[0]->id))
+		{
+			$jsonvalue->search[0] = new stdClass();
+			if ($type=='property') {$jsonvalue->search[0]->id='P???'; } else {$jsonvalue->search[0]->id='Q????';} //If no value found return dummy value for type
+		}
 		return $jsonvalue->search[0]->id;
 	}
 }
@@ -85,7 +90,7 @@ function getPropertyId($propname,$type='property')
 function getDataType($propid)
 {
 	global $wdapiurl;
-	if ($propid=="L??"||$propid=="D??"||$propid=="A??")
+	if ($propid=="L??"||$propid=="D??"||$propid=="A??"||$propid=="P???")
 	{
 		return "string";
 	}
