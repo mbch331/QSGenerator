@@ -32,7 +32,7 @@ else
 	{
 		//Check for empty rows and do nothing
 		$txt=preg_filter("/(\t)+/i","",$row[$i]);
-		$nt=preg_match("/[a-zA-Z0-9]/i",$txt);
+		$nt=strlen($txt); //regular expressions fail at non-latin script
 		if($nt>0)
 		{
 			//Step 2 processing: create cells from rows
