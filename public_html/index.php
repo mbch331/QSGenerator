@@ -27,25 +27,33 @@ else
 	//Form was submitted so needs to be processed
 	//Step 1 processing: creating rows
 	$row=explode("\r\n",trim($_POST['data']));
+	$n=0; //Start with row 0 for array $pair
 	for($i=0;$i<count($row);$i++)
 	{
-		//Step 2 processing: create cells from rows
-		$cell[$i]=explode("\t",$row[$i]);
-		if($i==0) // Row 0 contains the properties
+		//Check for empty rows and do nothing
+		$txt=preg_filter("/(\t)+/i","",$row[$i]);
+		$nt=preg_match("/[a-zA-Z0-9]/i",$txt);
+		if($nt>0)
 		{
-			for($j=0;$j<count($cell[0]);$j++)
+			//Step 2 processing: create cells from rows
+			$cell[$i]=explode("\t",$row[$i]);
+			if($i==0) // Row 0 contains the properties
 			{
-				$property[$j]['id']=getPropertyId($cell[0][$j]); //Get the property ID from Wikidata
+				for($j=0;$j<count($cell[0]);$j++)
+				{
+					$property[$j]['id']=getPropertyId($cell[0][$j]); //Get the property ID from Wikidata
+				}
 			}
-		}
-		else
-		{
-			for($j=0;$j<count($cell[$i]);$j++)
+			else
 			{
-				$key=$property[$j]['id'];
-				$value=$cell[$i][$j];
-				$pair[$i][$key]=$value;
+				for($j=0;$j<count($cell[$i]);$j++)
+				{
+					$key=$property[$j]['id'];
+					$value=$cell[$i][$j];
+					$pair[$n][$key]=$value;
+				}
 			}
+			$n++; //$n should only be raised when $pair[$n] has been filled
 		}
 	}
 	for ($i=1;$i<=count($pair);$i++)
