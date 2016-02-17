@@ -77,6 +77,7 @@ else
 			$n++; //$n should only be raised when $pair[$n] has been filled
 		}
 	}
+	echo '<code>';
 	for ($i=1;$i<=count($pair);$i++)
 	{
 		echo "CREATE<br>\r\n";
@@ -88,5 +89,6 @@ else
 			}
 		}
 	}	
+	echo '</code>';
 }
 ?>
