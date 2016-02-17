@@ -60,22 +60,23 @@ function invokeURL ($url, $trans=FALSE,$post=0,$close=TRUE,$postdata="")
 }
 function getPropertyId($propname,$type='property')
 {
+	global $lang;
 	if($propname=="Label")
 	{
-		return "L??"; //L = label, ?? = language unknown
+		return "L".$lang; //L = label, ?? = language unknown
 	}
 	elseif ($propname=="Description")
 	{
-		return "D??"; //D = description, ?? = language unknown
+		return "D".$lang; //D = description, ?? = language unknown
 	}
 	elseif ($propname=="Alias")
 	{
-		return "A??"; //A = alias, ?? = language unknown
+		return "A".$lang; //A = alias, ?? = language unknown
 	}
 	else
 	{
 		global $wdapiurl;
-		$apiQuery='action=wbsearchentities&format=json&search='.$propname.'&language=nl&type='.$type;
+		$apiQuery='action=wbsearchentities&format=json&search='.$propname.'&language='.$lang.'&type='.$type;
 		$jsonresult=invokeURL($wdapiurl.$apiQuery,$trans=TRUE);
 		$jsonvalue=json_decode($jsonresult);
 		if (!isset($jsonvalue->search[0]->id))
@@ -89,8 +90,8 @@ function getPropertyId($propname,$type='property')
 
 function getDataType($propid)
 {
-	global $wdapiurl;
-	if ($propid=="L??"||$propid=="D??"||$propid=="A??"||$propid=="P???")
+	global $wdapiurl,$lang;
+	if ($propid=="L".$lang||$propid=="D".$lang||$propid=="A".$lang||$propid=="P???")
 	{
 		return "string";
 	}
@@ -105,13 +106,14 @@ function getDataType($propid)
 
 function formatValue(&$value, $datatype)
 {
+	global $lang;
 	switch ($datatype)
 	{
 		case 'string':
 		return '"'.$value.'"'; //A string needs to be formatted as "some value"
 		break;
 		case 'monolingualtext':
-		return '??:"'.$value.'"'; //A monolingualtext needs to be formatted as languagecode:"somevalue"
+		return $lang.':"'.$value.'"'; //A monolingualtext needs to be formatted as languagecode:"somevalue"
 		break;
 		case 'wikibase-item':
 		return getPropertyID($value,'item'); //We need the QID
