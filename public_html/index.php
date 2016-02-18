@@ -15,7 +15,8 @@ if (!isset($_POST)||empty($_POST)) //No information was submitted, so need to sh
 	<form action="index.php" method="POST" enctype="multipart/form-data">
 	<label>Which language do you want to search in: <input type="text" value="" placeholder="Dutch" name="lang"></label><br>
 	<label>Paste the text you want to use:<br>
-	<textarea name="data" rows="6" cols="100" placeholder="Some tab seperated text with a new line for each data row" wrap="soft"></textarea></label>
+	<textarea name="data" rows="6" cols="100" placeholder="Some tab seperated text with a new line for each data row" wrap="soft"></textarea></label><br>
+	<label>Create:<input type="radio" name="cu" value="create" checked></label> <label>Update:<input type="radio" name="cu" value="update"></label>
 	<input type="hidden" name="verzonden" value="1">
 	<input type="submit" value="Verwerk">
 	</form>
@@ -80,12 +81,27 @@ else
 	echo '<code>';
 	for ($i=1;$i<=count($pair);$i++)
 	{
-		echo "CREATE<br>\r\n";
-		foreach($pair[$i] as $key => $value)
+		if($_POST['cu']=='create') 
 		{
-			if($value!="")
+			echo "CREATE<br>\r\n";
+			foreach($pair[$i] as $key => $value)
 			{
-				echo "LAST\t$key\t".formatValue($value,getDataType($key))."<br>\r\n";
+				if($value!="")
+				{
+					echo "LAST\t$key\t".formatValue($value,getDataType($key))."<br>\r\n";
+				}
+			}
+		}
+		else
+		{
+			$text='';
+			$item=getPropertyId($pair[$i]['item'],"item");
+			foreach($pair[$i] as $key => $value)
+			{
+				if($key!="item")
+				{
+					echo "$item\t$key\t".formatValue($value,getDataType($key))."<br>\r\n";
+				}
 			}
 		}
 	}	

@@ -73,6 +73,10 @@ function getPropertyId($propname,$type='property')
 	{
 		return "A".$lang; //A = alias, ?? = language unknown
 	}
+	elseif ($propname=="Item")
+	{
+		return "item"; //This is the item where the values need to be added to
+	}
 	else
 	{
 		global $wdapiurl;
@@ -94,6 +98,10 @@ function getDataType($propid)
 	if ($propid=="L".$lang||$propid=="D".$lang||$propid=="A".$lang||$propid=="P???")
 	{
 		return "string";
+	}
+	elseif ($propid=="item")
+	{
+		return "item";
 	}
 	else
 	{
