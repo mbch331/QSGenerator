@@ -78,33 +78,32 @@ else
 			$n++; //$n should only be raised when $pair[$n] has been filled
 		}
 	}
-	echo '<code>';
+	echo '<table>';
 	for ($i=1;$i<=count($pair);$i++)
 	{
 		if($_POST['cu']=='create') 
 		{
-			echo "CREATE<br>\r\n";
+			echo "<tr><td>CREATE</td>\r\n";
 			foreach($pair[$i] as $key => $value)
 			{
 				if($value!="")
 				{
-					echo "LAST\t$key\t".formatValue($value,getDataType($key))."<br>\r\n";
+					echo "<tr><td>LAST</td><td>$key</td><td>".formatValue($value,getDataType($key))."</td></tr>\r\n";
 				}
 			}
 		}
 		else
 		{
-			$text='';
 			$item=getPropertyId($pair[$i]['item'],"item");
 			foreach($pair[$i] as $key => $value)
 			{
 				if($key!="item")
 				{
-					echo "$item\t$key\t".formatValue($value,getDataType($key))."<br>\r\n";
+					echo "<tr><td>$item</td><td>$key</td><td>".formatValue($value,getDataType($key))."</td></tr>\r\n";
 				}
 			}
 		}
 	}	
-	echo '</code>';
+	echo '</table>';
 }
 ?>
