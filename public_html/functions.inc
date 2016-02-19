@@ -80,7 +80,7 @@ function getPropertyId($propname,$type='property')
 	else
 	{
 		global $wdapiurl;
-		$apiQuery='action=wbsearchentities&format=json&search='.$propname.'&language='.$lang.'&type='.$type;
+		$apiQuery='action=wbsearchentities&format=json&search='.urlencode($propname).'&language='.$lang.'&type='.$type;
 		$jsonresult=invokeURL($wdapiurl.$apiQuery,$trans=TRUE);
 		$jsonvalue=json_decode($jsonresult);
 		if (!isset($jsonvalue->search[0]->id))

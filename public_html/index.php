@@ -97,7 +97,7 @@ else
 			$item=getPropertyId($pair[$i]['item'],"item");
 			foreach($pair[$i] as $key => $value)
 			{
-				if($key!="item")
+				if($key!="item"&&$value!="")
 				{
 					echo "<tr><td>$item</td><td>$key</td><td>".formatValue($value,getDataType($key))."</td></tr>\r\n";
 				}
