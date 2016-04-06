@@ -130,7 +130,7 @@ function formatValue(&$value, $datatype)
 		try {$datum=new DateTime($value);} catch (Exception $e) {}
 		if(isset($datum))
 		{	
-			$dat="+0000000".$datum->format("Y-m-d")."T00:00:00Z/11"; // Format: +00000001840-01-01T00:00:00Z/09
+			$dat="+".$datum->format("Y-m-d")."T00:00:00Z/11"; // Format: +00000001840-01-01T00:00:00Z/09
 			return $dat;
 		}
 		else
